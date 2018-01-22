@@ -3,10 +3,10 @@
 ## enable vi mode outright
 set -o vi
 ## shortlinks
-alias sysupdate="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean"
-alias wmrestart="sudo systemctl restart gdm.service"
+alias sysupdate='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean'
+alias wmrestart='sudo killall -HUP gnome-shell'
 ## always list humanly readable
-alias ll="ls -l -h"
+alias ll='ls -l -h'
 ## weird fix thing
 export PATH="/usr/local/bin:$PATH"
 
@@ -18,7 +18,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-alias quit="exit"
+alias quit='exit'
 ### go
 export GOPATH="$HOME/Projects/gospace"
 export PATH="$GOPATH/bin:$PATH"
