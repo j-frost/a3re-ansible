@@ -1,0 +1,87 @@
+---
+- name: install zsh and git
+  package:
+    name: zsh,git
+    state: latest
+  become: true
+  become_user: root
+  register: installation
+
+- name: activate zsh as default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+  become: true
+  become_user: root
+  when: installation|success
+
+- name: clone oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: ~/.oh-my-zsh
+  when: installation|success
+  register: cloning
+
+- name: create new ~/.zshrc
+  copy:
+    src: ~/.oh-my-zsh/templates/zshrc.zsh-template
+    dest: ~/.zshrc
+  when: cloning|success
+
+- name: copy grml.conf
+  copy:
+    src: .zshrc.local
+    dest: ~/.zshrc.local
+  when: cloning|success
+
+- name: add convenience features
+  copy:
+    src: .zshrc.convenience.local
+    dest: ~/.zshrc.convenience.local
+  when: cloning|success and ansible_hostname == "160163L"
+
+- name: add convenience features
+  copy:
+    src: .zshrc.convenience.server
+    dest: ~/.zshrc.convenience.local
+  when: cloning|success and ansible_hostname != "160163L"
+
+- name: ensure .dir_colors directory
+  file:
+    path: ~/.dir_colors
+    state: directory
+  when: cloning|success
+
+- name: copy dircolors
+  copy:
+    src: dircolors
+    dest: ~/.dir_colors/dircolors
+  when: cloning|success
+
+- name: change shell theme to agnoster
+  lineinfile:
+    path: ~/.zshrc
+    regexp: "^ZSH_THEME.*"
+    line: 'ZSH_THEME="agnoster"'
+
+- name: configure activated plugins
+  lineinfile:
+    path: ~/.zshrc
+    regexp: "  git"
+    line: 'ubuntu systemd man colorized colored-man-pages svn sudo git docker cp adb ruby gem rake rails rbenv mvn npm node bundler bower perl golang lol history-substring-search'
+
+- name: add dircolors support
+  lineinfile:
+    path: ~/.zshrc
+    line: 'eval `dircolors $HOME/.dir_colors/dircolors`'
+
+- name: add convenience features
+  lineinfile:
+    path: ~/.zshrc
+    line: 'source $HOME/.zshrc.convenience.local'
+
+- name: add "fuck" support
+  lineinfile:
+    path: ~/.zshrc
+    line: 'eval $(thefuck --alias)'
+  when: ansible_hostname == "160163L"

@@ -1,0 +1,13 @@
+# general
+
+## enable vi mode outright
+set -o vi
+
+## shortlinks
+alias sysupdate="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean"
+## always list humanly readable
+alias ll="ls -l -h"
+
+alias quit="exit"
+
+source ~/.profile
