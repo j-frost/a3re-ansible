@@ -1,0 +1,12 @@
+---
+- name: install ruby and redis
+  package:
+    name: ruby,redis-server
+    state: latest
+  become: true
+
+- name: add ots user
+  user:
+    name: ots
+    shell: /bin/zsh
+  become: true

@@ -1,0 +1,12 @@
+---
+one_time_secret_build_dependencies:
+  - build-essential
+  - ntp
+  - libyaml-dev
+  - libevent-dev
+  - zlib1g
+  - zlib1g-dev
+  - openssl
+  - libssl-dev
+  - libxml2
+  - libreadline-gplv2-dev

@@ -4,7 +4,6 @@
     name: zsh,git
     state: latest
   become: true
-  become_user: root
   register: installation
 
 - name: activate zsh as default shell
@@ -12,51 +11,44 @@
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
   become: true
-  become_user: root
-  when: installation|success
+  when: installation is success
 
 - name: clone oh-my-zsh
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
     dest: ~/.oh-my-zsh
-  when: installation|success
+  when: installation is success
   register: cloning
 
 - name: create new ~/.zshrc
   copy:
     src: ~/.oh-my-zsh/templates/zshrc.zsh-template
     dest: ~/.zshrc
-  when: cloning|success
-
-- name: copy grml.conf
-  copy:
-    src: .zshrc.local
-    dest: ~/.zshrc.local
-  when: cloning|success
+  when: cloning is success
 
 - name: add convenience features
   copy:
     src: .zshrc.convenience.local
     dest: ~/.zshrc.convenience.local
-  when: cloning|success and ansible_hostname == "160163L"
+  when: cloning is success and ansible_hostname == "160163L"
 
 - name: add convenience features
   copy:
     src: .zshrc.convenience.server
     dest: ~/.zshrc.convenience.local
-  when: cloning|success and ansible_hostname != "160163L"
+  when: cloning is success and ansible_hostname != "160163L"
 
 - name: ensure .dir_colors directory
   file:
     path: ~/.dir_colors
     state: directory
-  when: cloning|success
+  when: cloning is success
 
 - name: copy dircolors
   copy:
     src: dircolors
     dest: ~/.dir_colors/dircolors
-  when: cloning|success
+  when: cloning is success
 
 - name: change shell theme to agnoster
   lineinfile:

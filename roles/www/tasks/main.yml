@@ -1,0 +1,14 @@
+---
+- name: install apache
+  package:
+    name: apache2
+    state: latest
+  become: true
+
+- name: copy ssh config
+  copy:
+    src: index.html
+    dest: /var/www/html
+    owner: www-data
+    group: www-data
+  become: true

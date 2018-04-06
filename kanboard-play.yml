@@ -1,0 +1,8 @@
+---
+- hosts: kanboard
+  remote_user: j-frost
+  roles:
+    - ohmyzsh
+    - kanboard
+  vars:
+    ansible_sudo_flags: --set-home --stdin

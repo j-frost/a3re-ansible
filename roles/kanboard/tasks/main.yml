@@ -1,0 +1,44 @@
+---
+- name: install kanboard dependencies
+  package:
+    name: "{{ kanboard_dependencies }}"
+    state: latest
+  become: true
+
+- name: unarchive kanboard
+  unarchive:
+    src: "kanboard-{{ kanboard_version }}.tar.gz"
+    dest: /var/www
+    owner: www-data
+    group: www-data
+  become: true
+  register: unarchive_kanboard_sources
+
+- name: clean previous installation
+  file:
+    state: absent
+    path: /var/www/html
+  become: true
+  when: unarchive_kanboard_sources is success
+  register: clean_previous_kanboard
+
+- name: ensure apache root directory exists
+  file:
+    state: directory
+    path: /var/www/html
+  become: true
+  when: clean_previous_kanboard is success
+  register: apache_root_exists
+
+- name: move kanboard sources to index of apache
+  shell: "mv /var/www/kanboard-{{ kanboard_version }}/* /var/www/html"
+  become: true
+  when: apache_root_exists is success
+  register: move_kanboard_sources
+
+- name: clean up
+  file:
+    state: absent
+    path: "/var/www/kanboard-{{ kanboard_version }}"
+  become: true
+  when: move_kanboard_sources is success

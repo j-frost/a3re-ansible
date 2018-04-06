@@ -1,0 +1,56 @@
+Host blue-1-root
+	Hostname blue-1.a3re.net
+	User root
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
+Host blue-1
+	Hostname blue-1.a3re.net
+	User j-frost
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
+Host proxmox-root
+	Hostname proxmox.a3re.net
+	User root
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/idr_rsa
+
+Host proxmox
+	Hostname proxmox.a3re.net
+	User j-frost
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
+Host quassel
+	Hostname quassel.a3re.net
+	Port 2101
+	User j-frost
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
+Host ots
+	Hostname one-time-secret.a3re.net
+	Port 2102
+	User j-frost
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
+Host kanboard
+	Hostname kanboard.a3re.net
+	Port 2103
+	User j-frost
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
+Host www-a3re
+	Hostname www.a3re.net
+	Port 2104
+	User j-frost
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
+Host *
+	IdentitiesOnly yes
+
+Include ~/.ssh/local-config

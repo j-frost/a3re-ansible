@@ -1,0 +1,16 @@
+---
+kanboard_dependencies:
+  - apache2
+  - libapache2-mod-php7.0
+  - php7.0-cli
+  - php7.0-mbstring
+  - php7.0-sqlite3
+  - php7.0-opcache
+  - php7.0-json
+  - php7.0-mysql
+  - php7.0-pgsql
+  - php7.0-ldap
+  - php7.0-gd
+  - php7.0-xml
+
+kanboard_version: "1.2.2"

@@ -1,0 +1,8 @@
+---
+- hosts: one-time-secret
+  remote_user: j-frost
+  roles:
+    - ohmyzsh
+    - onetimesecret
+  vars:
+    ansible_sudo_flags: --set-home --stdin

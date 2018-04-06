@@ -1,0 +1,33 @@
+---
+- hosts: proxmox
+  remote_user: j-frost
+  roles:
+#    - ohmyzsh
+    - name: hispanico.letsencrypt-nginx-revproxy
+      become: true
+  vars:
+    nginx_revproxy_sites:
+      proxmox.a3re.net:
+        domains:
+          - proxmox.a3re.net
+        upstreams:
+          - { backend_address: 10.0.0.1, backend_port: 8006 }
+        ssl: true
+        letsencrypt: true
+        letsencrypt_email: letsencrpyt@a3re.net
+      kanboard.a3re.net:
+        domains:
+          - kanboard.a3re.net
+        upstreams:
+          - { backend_address: 10.1.0.3, backend_port: 80 }
+        ssl: true
+        letsencrypt: true
+        letsencrypt_email: letsencrpyt@a3re.net
+      www.a3re.net:
+        domains:
+          - www.a3re.net
+        upstreams:
+          - { backend_address: 10.1.0.4, backend_port: 80 }
+        ssl: true
+        letsencrypt: true
+        letsencrypt_email: letsencrpyt@a3re.net

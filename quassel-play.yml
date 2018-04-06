@@ -1,0 +1,5 @@
+---
+- hosts: quassel-core
+  remote_user: j-frost
+  roles:
+    - ohmyzsh

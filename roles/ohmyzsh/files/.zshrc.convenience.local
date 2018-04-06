@@ -1,7 +1,7 @@
 # general
 
 ## enable vi mode outright
-set -o vi
+#set -o vi
 ## shortlinks
 alias sysupdate='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean'
 alias wmrestart='sudo killall -HUP gnome-shell'
@@ -9,6 +9,9 @@ alias wmrestart='sudo killall -HUP gnome-shell'
 alias ll='ls -l -h'
 ## weird fix thing
 export PATH="/usr/local/bin:$PATH"
+
+## direnv
+eval "$(direnv hook zsh)"
 
 # programming
 
@@ -23,15 +26,9 @@ alias quit='exit'
 export GOPATH="$HOME/Projects/gospace"
 export PATH="$GOPATH/bin:$PATH"
 ### python
-pip() {
-	if [ "$1" = "install" -o "$1" = "bundle" ]; then
-		cmd="$1"
-		shift
-		/usr/bin/pip $cmd --user $@
-	else
-		/usr/bin/pip $@
-	fi
-}
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 ## platforms
 export MAVEN_COLOR=true
@@ -46,4 +43,3 @@ export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HO
 export PATH="/opt/RubyMine-2016.3.2/bin:$PATH"
 
 source ~/.profile
-

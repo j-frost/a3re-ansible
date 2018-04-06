@@ -1,9 +1,0 @@
----
-- hosts: this-machine
-  roles:
-    - ohmyzsh
-
-- hosts: proxmox-servers
-  remote_user: j-frost
-  roles:
-    - ohmyzsh

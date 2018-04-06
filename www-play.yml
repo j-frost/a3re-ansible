@@ -1,0 +1,6 @@
+---
+- hosts: www
+  remote_user: j-frost
+  roles:
+    - ohmyzsh
+    - www
