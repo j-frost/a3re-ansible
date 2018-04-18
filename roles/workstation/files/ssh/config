@@ -50,6 +50,13 @@ Host www-a3re
 	PubKeyAuthentication yes
 	IdentityFile ~/.ssh/id_rsa
 
+Host wekan
+	Hostname wekan.a3re.net
+	Port 2105
+	User j-frost
+	PubKeyAuthentication yes
+	IdentityFile ~/.ssh/id_rsa
+
 Host *
 	IdentitiesOnly yes
 
